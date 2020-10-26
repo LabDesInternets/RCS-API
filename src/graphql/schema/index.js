@@ -20,6 +20,12 @@ module.exports = buildSchema(`
       password: String
     }
 
+    type AuthData {
+      userId: ID!
+      token: String!
+      tokenExpiration: Int!
+    }
+
     input ArticleInput {
       slug: String!
       picture: String!
@@ -37,6 +43,7 @@ module.exports = buildSchema(`
 
     type RootQuery {
       articles: [Article!]!
+      login(email: String!, password: String!): AuthData!
     }
 
     type RootMutation {

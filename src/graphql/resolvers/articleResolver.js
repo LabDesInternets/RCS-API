@@ -17,7 +17,10 @@ module.exports = {
       throw err;
     }
   },
-  createArticle: async (args) => {
+  createArticle: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     const article = new Article({
       slug: args.articleInput.slug,
       picture: args.articleInput.picture,
